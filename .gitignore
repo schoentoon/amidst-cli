@@ -11,3 +11,4 @@
 .idea
 bin
 out
+target/

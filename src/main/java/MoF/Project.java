@@ -1,21 +1,14 @@
 package MoF;
 
-import amidst.Log;
 import amidst.Options;
 import amidst.map.MapObject;
-import amidst.map.MapObjectPlayer;
-import amidst.minecraft.Minecraft;
 import amidst.minecraft.MinecraftUtil;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyListener;
-import java.net.MalformedURLException;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.swing.JPanel;
 
 @Deprecated //TODO: we should remove this and integrate it into Options
 public class Project extends JPanel {
@@ -32,8 +25,6 @@ public class Project extends JPanel {
 	public Project(String seed) {
 		this(stringToLong(seed));
 		Options.instance.seedText = seed;
-		
-		Google.track("seed/" + seed + "/" + Options.instance.seed);
 	}
 	
 	public Project(long seed) {
@@ -42,14 +33,10 @@ public class Project extends JPanel {
 	
 	public Project(SaveLoader file) {
 		this(file.seed, SaveLoader.genType, file);
-		
-		Google.track("seed/file/" + Options.instance.seed);
 	}
 	
 	public Project(String seed, SaveLoader.Type type) {
 		this(stringToLong(seed), type);
-		
-		Google.track("seed/" + seed + "/" + Options.instance.seed);
 	}
 	
 	public Project(long seed, SaveLoader.Type type) {
