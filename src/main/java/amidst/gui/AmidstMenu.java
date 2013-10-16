@@ -1,8 +1,7 @@
 package amidst.gui;
 
 import MoF.*;
-import amidst.Log;
-import amidst.Options;
+import amidst.Global;
 import amidst.Util;
 import amidst.map.MapObjectPlayer;
 import amidst.map.layers.StrongholdLayer;
@@ -195,19 +194,19 @@ public class AmidstMenu extends JMenuBar {
 				add(new DisplayingCheckbox("Map Flicking",
 						null,
 						KeyEvent.VK_I,
-						Options.instance.mapFlicking));
+						Global.instance.mapFlicking));
 				add(new CopySeedMenuItem());
 				
 				add(new DisplayingCheckbox("Restrict Maximum Zoom",
 						null,
 						KeyEvent.VK_Z,
-						Options.instance.maxZoom));
+						Global.instance.maxZoom));
 				
 				
 				add(new DisplayingCheckbox("Show Framerate",
 						null,
 						KeyEvent.VK_L,
-						Options.instance.showFPS));
+						Global.instance.showFPS));
 			}
 			
 		}
@@ -261,42 +260,42 @@ public class AmidstMenu extends JMenuBar {
 				add(new DisplayingCheckbox("Grid",
 					ResourceLoader.getImage("grid.png"),
 					KeyEvent.VK_1,
-					Options.instance.showGrid));
+					Global.instance.showGrid));
 				
 				add(new DisplayingCheckbox("Slime chunks",
 					ResourceLoader.getImage("slime.png"),
 					KeyEvent.VK_2,
-					Options.instance.showSlimeChunks));
+					Global.instance.showSlimeChunks));
 				
 				add(new DisplayingCheckbox("Village Icons",
 					ResourceLoader.getImage("village.png"),
 					KeyEvent.VK_3,
-					Options.instance.showVillages));
+					Global.instance.showVillages));
 				
 				add(new DisplayingCheckbox("Temple/Witch Hut Icons",
 					ResourceLoader.getImage("temple.png"),
 					KeyEvent.VK_4,
-					Options.instance.showTemples));
+					Global.instance.showTemples));
 				
 				add(new DisplayingCheckbox("Stronghold Icons",
 					ResourceLoader.getImage("stronghold.png"),
 					KeyEvent.VK_5,
-					Options.instance.showStrongholds));
+					Global.instance.showStrongholds));
 				
 				add(new DisplayingCheckbox("Player Icons",
 					ResourceLoader.getImage("player.png"),
 					KeyEvent.VK_6,
-					Options.instance.showPlayers));
+					Global.instance.showPlayers));
 				
 				add(new DisplayingCheckbox("Nether Fortress Icons",
 					ResourceLoader.getImage("nether_fortress.png"),
 					KeyEvent.VK_7,
-					Options.instance.showNetherFortresses));
+					Global.instance.showNetherFortresses));
 				
 				add(new DisplayingCheckbox("Spawn Location Icon",
 						ResourceLoader.getImage("spawn.png"),
 						KeyEvent.VK_8,
-						Options.instance.showSpawn));
+						Global.instance.showSpawn));
 				
 			}
 			
@@ -343,7 +342,7 @@ public class AmidstMenu extends JMenuBar {
 				addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						StringSelection stringSelection = new StringSelection(Options.instance.seed + "");
+						StringSelection stringSelection = new StringSelection(Global.instance.seed + "");
 					    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 					    clipboard.setContents(stringSelection, new ClipboardOwner() {
 							@Override
@@ -360,7 +359,7 @@ public class AmidstMenu extends JMenuBar {
 	
 	private class OptionsMenu extends JMenu {
 		private OptionsMenu() {
-			super("Options");
+			super("Global");
 			setMnemonic(KeyEvent.VK_M);
 			add(new JMenuItem("Biome colors") {{
 				addActionListener(new ActionListener() {

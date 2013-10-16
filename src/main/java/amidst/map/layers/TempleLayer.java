@@ -4,16 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import amidst.Log;
-import amidst.Options;
+import amidst.Global;
 import amidst.foreign.VersionInfo;
 import amidst.map.Fragment;
 import amidst.map.IconLayer;
 import amidst.map.MapObject;
-import amidst.map.MapObjectNether;
-import amidst.map.MapObjectStronghold;
 import amidst.map.MapObjectTemple;
-import amidst.map.MapObjectVillage;
 import amidst.map.MapObjectWitchHut;
 import amidst.minecraft.Biome;
 import amidst.minecraft.Minecraft;
@@ -25,7 +21,7 @@ public class TempleLayer extends IconLayer {
 	
 	public TempleLayer() {
 		super("temples");
-		setVisibilityPref(Options.instance.showTemples);
+		setVisibilityPref(Global.instance.showTemples);
 		
 		validBiomes = getValidBiomes();
 	}
@@ -93,7 +89,7 @@ public class TempleLayer extends IconLayer {
 		
 		int n = chunkX / i;
 		int i1 = chunkY / i;
-		long l1 = n * 341873128712L + i1 * 132897987541L + Options.instance.seed + 14357617;
+		long l1 = n * 341873128712L + i1 * 132897987541L + Global.instance.seed + 14357617;
 		random.setSeed(l1);
 		n *= i;
 		i1 *= i;

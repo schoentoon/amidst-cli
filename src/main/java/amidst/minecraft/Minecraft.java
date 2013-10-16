@@ -1,5 +1,18 @@
 package amidst.minecraft;
 
+import amidst.Log;
+import amidst.Util;
+import amidst.bytedata.ByteClass;
+import amidst.bytedata.CCLongMatch;
+import amidst.bytedata.CCMethodPreset;
+import amidst.bytedata.CCMulti;
+import amidst.bytedata.CCPropertyPreset;
+import amidst.bytedata.CCRequire;
+import amidst.bytedata.CCStringMatch;
+import amidst.bytedata.CCWildcardByteSearch;
+import amidst.bytedata.ClassChecker;
+import amidst.foreign.VersionInfo;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.lang.reflect.Field;
@@ -14,23 +27,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
-import javax.swing.JFrame;
-import javax.swing.JProgressBar;
-
-import amidst.Amidst;
-import amidst.Log;
-import amidst.Util;
-import amidst.bytedata.ByteClass;
-import amidst.bytedata.CCLongMatch;
-import amidst.bytedata.CCMethodPreset;
-import amidst.bytedata.CCMulti;
-import amidst.bytedata.CCPropertyPreset;
-import amidst.bytedata.CCRequire;
-import amidst.bytedata.CCStringMatch;
-import amidst.bytedata.CCWildcardByteSearch;
-import amidst.bytedata.ClassChecker;
-import amidst.foreign.VersionInfo;
 
 public class Minecraft {
 	private static final int MAX_CLASSES = 128;
@@ -85,10 +81,6 @@ public class Minecraft {
 	
 	public String versionId;
 	public VersionInfo version = VersionInfo.unknown;
-	
-	public Minecraft() throws MalformedURLException {
-		this(Amidst.installInformation.getJarFile());
-	}
 	
 	public Minecraft(File jarFile)  throws MalformedURLException {
 		byteClassNames = new Vector<String>();

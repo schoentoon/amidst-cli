@@ -1,24 +1,15 @@
 package amidst.map.layers;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import amidst.Global;
 import amidst.Log;
-import amidst.Options;
 import amidst.map.Fragment;
 import amidst.map.IconLayer;
-import amidst.map.Layer;
 import amidst.map.MapObjectSpawn;
-import amidst.map.MapObjectStronghold;
 import amidst.minecraft.Biome;
 import amidst.minecraft.MinecraftUtil;
 
@@ -36,7 +27,7 @@ public class SpawnLayer extends IconLayer {
 	
 	public SpawnLayer() {
 		super("spawnPoint");
-		setVisibilityPref(Options.instance.showSpawn);
+		setVisibilityPref(Global.instance.showSpawn);
 		
 		Point spawnCenter = getSpawnPosition();
 		spawnObject = new MapObjectSpawn(spawnCenter.x, spawnCenter.y);
@@ -53,7 +44,7 @@ public class SpawnLayer extends IconLayer {
 	}
 	
 	private Point getSpawnPosition() {
-		Random random = new Random(Options.instance.seed);
+		Random random = new Random(Global.instance.seed);
 		Point location = MinecraftUtil.findValidLocation(0, 0, 256, validBiomes, random);
 		int x = 0;
 		int y = 0;

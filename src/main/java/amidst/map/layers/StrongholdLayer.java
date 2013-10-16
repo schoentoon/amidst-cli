@@ -6,17 +6,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import amidst.Log;
-import amidst.Options;
+import amidst.Global;
 import amidst.foreign.VersionInfo;
 import amidst.map.Fragment;
 import amidst.map.IconLayer;
-import amidst.map.MapObjectNether;
 import amidst.map.MapObjectStronghold;
-import amidst.map.MapObjectVillage;
 import amidst.minecraft.Biome;
 import amidst.minecraft.Minecraft;
-import amidst.minecraft.MinecraftObject;
 import amidst.minecraft.MinecraftUtil;
 
 public class StrongholdLayer extends IconLayer {
@@ -69,7 +65,7 @@ public class StrongholdLayer extends IconLayer {
 	public StrongholdLayer() {
 		super("strongholds");
 		instance = this;
-		setVisibilityPref(Options.instance.showStrongholds);
+		setVisibilityPref(Global.instance.showStrongholds);
 		
 		findStrongholds();
 	}
@@ -90,7 +86,7 @@ public class StrongholdLayer extends IconLayer {
 	 
 	public void findStrongholds() {
 		Random random = new Random();
-		random.setSeed(Options.instance.seed);
+		random.setSeed(Global.instance.seed);
 		
 		
 		// TODO: Replace this system!

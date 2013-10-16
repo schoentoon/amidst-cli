@@ -1,8 +1,8 @@
 package MoF;
 
 
+import amidst.Global;
 import amidst.Log;
-import amidst.Options;
 import amidst.gui.PlayerMenuItem;
 import amidst.map.IconLayer;
 import amidst.map.Layer;
@@ -42,7 +42,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
-import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 public class MapViewer extends JComponent implements MouseListener, MouseWheelListener, KeyListener {
@@ -157,7 +156,7 @@ public class MapViewer extends JComponent implements MouseListener, MouseWheelLi
 		}
 
 		worldMap.moveBy((int)panSpeed.x, (int)panSpeed.y);
-		if (Options.instance.mapFlicking.get()) {
+		if (Global.instance.mapFlicking.get()) {
 			panSpeed.x *= 0.95f;
 			panSpeed.y *= 0.95f;
 		} else {
@@ -179,15 +178,15 @@ public class MapViewer extends JComponent implements MouseListener, MouseWheelLi
 			drawSelectedInformation(g2d);
 		if (isMouseInside)
 			drawMouseInformation(g2d, curMouse);
-		if (Options.instance.showFPS.get())
+		if (Global.instance.showFPS.get())
 			drawFramerate(g2d);
 	}
 	
 	private void drawSeed(Graphics2D g2d) {
 		g2d.setColor(panelColor);
-		g2d.fillRect(10, 10, textMetrics.stringWidth(Options.instance.getSeedMessage()) + 20, 30);
+		g2d.fillRect(10, 10, textMetrics.stringWidth(Global.instance.getSeedMessage()) + 20, 30);
 		g2d.setColor(textColor);
-		g2d.drawString(Options.instance.getSeedMessage(), 20, 30);
+		g2d.drawString(Global.instance.getSeedMessage(), 20, 30);
 	}
 	
 	private void drawMouseInformation(Graphics2D g2d, Point mousePosition) {		
@@ -231,7 +230,7 @@ public class MapViewer extends JComponent implements MouseListener, MouseWheelLi
 	public void adjustZoom(Point position, int notches) {
 		zoomMouse = position;
 		if (notches > 0) {
-			if (zoomLevel < (Options.instance.maxZoom.get()?10:10000)) {
+			if (zoomLevel < (Global.instance.maxZoom.get()?10:10000)) {
 				targetZoom /= 1.1;
 				zoomLevel++;
 				zoomTicksRemaining = 100;
@@ -309,13 +308,13 @@ public class MapViewer extends JComponent implements MouseListener, MouseWheelLi
 		
 		// TODO: Change this to drawSeed
 		g2d.setColor(panelColor);
-		g2d.fillRect(10, 10, textMetrics.stringWidth(Options.instance.getSeedMessage()) + 20, 30);
+		g2d.fillRect(10, 10, textMetrics.stringWidth(Global.instance.getSeedMessage()) + 20, 30);
 		
 		
 		g2d.setColor(textColor);
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2d.setFont(textFont);
-		g2d.drawString(Options.instance.getSeedMessage(), 20, 30);
+		g2d.drawString(Global.instance.getSeedMessage(), 20, 30);
 		
 		
 		try {

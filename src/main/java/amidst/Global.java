@@ -8,7 +8,7 @@ import java.util.prefs.Preferences;
 
 /** Currently selected options that change AMIDST’s behavior
  */
-public enum Options {
+public enum Global {
 	instance;
 	
 	//per-run preferences. TODO: store elsewhere?
@@ -24,7 +24,7 @@ public enum Options {
 	public final BooleanPrefModel mapFlicking, showFPS;
 	public final BooleanPrefModel maxZoom;
 	
-	private Options() {
+	private Global() {
 		seed = 0L;
 		seedText = null;
 		

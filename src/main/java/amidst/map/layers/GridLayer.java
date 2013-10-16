@@ -2,11 +2,10 @@ package amidst.map.layers;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
-import amidst.Options;
+import amidst.Global;
 import amidst.map.Fragment;
 import amidst.map.Layer;
 
@@ -17,7 +16,7 @@ public class GridLayer extends Layer {
 	private static char[] textCache = new char[128];
 	public GridLayer() {
 		super("grid", null, 1.1f);
-		setVisibilityPref(Options.instance.showGrid);
+		setVisibilityPref(Global.instance.showGrid);
 	}
 	
 	public void drawLive(Fragment fragment, Graphics2D g, AffineTransform mat) {

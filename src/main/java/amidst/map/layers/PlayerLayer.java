@@ -1,20 +1,13 @@
 package amidst.map.layers;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import MoF.SaveLoader;
 import MoF.SkinManager;
-import amidst.Log;
-import amidst.Options;
+import amidst.Global;
 import amidst.map.Fragment;
 import amidst.map.IconLayer;
-import amidst.map.Map;
-import amidst.map.MapObjectNether;
 import amidst.map.MapObjectPlayer;
-import amidst.map.MapObjectStronghold;
-import amidst.map.MapObjectVillage;
 
 public class PlayerLayer extends IconLayer {
 	public SaveLoader saveLoader;
@@ -24,7 +17,7 @@ public class PlayerLayer extends IconLayer {
 	}
 	public PlayerLayer(SaveLoader saveLoader) {
 		super("players");
-		setVisibilityPref(Options.instance.showPlayers);
+		setVisibilityPref(Global.instance.showPlayers);
 		this.saveLoader = saveLoader;
 		
 		for (MapObjectPlayer player : saveLoader.getPlayers())

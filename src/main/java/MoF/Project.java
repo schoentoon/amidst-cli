@@ -1,6 +1,6 @@
 package MoF;
 
-import amidst.Options;
+import amidst.Global;
 import amidst.map.MapObject;
 import amidst.minecraft.MinecraftUtil;
 
@@ -10,7 +10,7 @@ import java.awt.event.KeyListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-@Deprecated //TODO: we should remove this and integrate it into Options
+@Deprecated //TODO: we should remove this and integrate it into Global
 public class Project extends JPanel {
 	private static final long serialVersionUID = 1132526465987018165L;
 	
@@ -24,7 +24,7 @@ public class Project extends JPanel {
 	
 	public Project(String seed) {
 		this(stringToLong(seed));
-		Options.instance.seedText = seed;
+		Global.instance.seedText = seed;
 	}
 	
 	public Project(long seed) {
@@ -47,7 +47,7 @@ public class Project extends JPanel {
 		saveLoaded = !(saveLoader == null);
 		save = saveLoader;
 		//Enter seed data:
-		Options.instance.seed = seed;
+		Global.instance.seed = seed;
 		
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
