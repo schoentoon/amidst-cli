@@ -1,12 +1,11 @@
 package amidst.minecraft;
 
-import java.awt.Point;
-import java.util.List;
-import java.util.Random;
-
+import MoF.SaveLoader.Type;
 import amidst.Log;
 
-import MoF.SaveLoader.Type;
+import java.awt.*;
+import java.util.List;
+import java.util.Random;
 
 public class MinecraftUtil {
 	public static int[] getBiomeData(int x, int y, int width, int height) {
