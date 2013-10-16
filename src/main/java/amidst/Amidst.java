@@ -70,7 +70,11 @@ public class Amidst {
 			new Minecraft(installInformation.getJarFile());
 		} else if (line.hasOption('j')) {
 			new Minecraft(new File(line.getOptionValue('j')));
+		} else {
+			error("No --profile or --jar specified");
 		}
+		if (!line.hasOption('o'))
+			error("No output file specified");
 		Global.instance.seed = 0;
 		MinecraftUtil.createBiomeGenerator(Global.instance.seed, SaveLoader.Type.DEFAULT);
 		IconLayer[] iconLayers = new IconLayer[]{new VillageLayer()
@@ -84,13 +88,16 @@ public class Amidst {
 						,iconLayers);
 		map.width = 1920;
 		map.height = 1080;
-		BufferedImage output = new BufferedImage(1920, 1080, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage output = new BufferedImage(map.width, map.height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = output.createGraphics();
-		map.draw(g2d);
+		int till = (map.width > map.height) ? map.width : map.height;
+		till /= 50;
+		for (int i = 0; i < till; i++)
+			map.draw(g2d);
 		File outputFile = new File(line.getOptionValue('o'));
 		ImageIO.write(output, "png", outputFile);
-		g2d.dispose();
-		output.flush();
+		System.err.println("Wrote to " + outputFile.getAbsolutePath());
+		System.exit(0);
 	}
 
 	public static void error(String error) {
