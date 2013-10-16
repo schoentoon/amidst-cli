@@ -6,6 +6,7 @@ import amidst.minecraft.Minecraft;
 import com.google.gson.Gson;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
@@ -23,18 +24,24 @@ public class Amidst {
 	
 	public static void main(String args[]) throws ParseException, FileNotFoundException, MalformedURLException {
 		Options opts = new Options();
-		opts.addOption(OptionBuilder.withArgName("profile=default")
+		opts.addOption(OptionBuilder.withLongOpt("profile")
 				                    .hasArgs(1)
 				                    .withValueSeparator()
 				                    .withDescription("Use this minecraft profile")
 				                    .create('p'));
-		opts.addOption(OptionBuilder.withArgName("jarfile=path")
+		opts.addOption(OptionBuilder.withLongOpt("jar")
 				                    .hasArgs(1)
 		                            .withValueSeparator()
 		                            .withDescription("Use the following minecraft.jar")
 		                            .create('j'));
+		opts.addOption(OptionBuilder.withLongOpt("help").create('h'));
 		CommandLineParser parser = new PosixParser();
 		CommandLine line = parser.parse(opts, args);
+		if (line.hasOption('h') || args.length == 0) {
+			HelpFormatter formatter = new HelpFormatter();
+			formatter.printHelp("amidst", opts);
+			System.exit(0);
+		}
 		Minecraft minecraft = null;
 		if (line.hasOption('p')) {
 			File profileJsonFile = new File(Util.minecraftDirectory + "/launcher_profiles.json");
