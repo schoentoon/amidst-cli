@@ -1,12 +1,7 @@
 package amidst;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
-import java.io.File;
-
 import com.google.gson.Gson;
 
-import MoF.Google;
 import amidst.gui.VersionSelectWindow;
 import amidst.json.InstallInformation;
 import amidst.minecraft.Minecraft;
@@ -20,8 +15,6 @@ public class Amidst {
 	
 	public static void main(String args[]) {
 		if (!isOSX()) { Util.setLookAndFeel(); }
-		Google.startTracking();
-		Google.track("Run");
 		new VersionSelectWindow();
 	}
 	
