@@ -71,6 +71,7 @@ public class Amidst {
 		opts.addOption(OptionBuilder.withDescription("Don't mark temples (witch huts are temples too)").create("notemples"));
 		opts.addOption(OptionBuilder.withDescription("Don't mark strongholds").create("nostrongholds"));
 		opts.addOption(OptionBuilder.withDescription("Don't mark spawn").create("nospawn"));
+		opts.addOption(OptionBuilder.withDescription("Draw the seed").create("drawseed"));
 		CommandLineParser parser = new PosixParser();
 		CommandLine line = parser.parse(opts, args);
 		if (line.hasOption('h') || args.length == 0) {
@@ -93,12 +94,14 @@ public class Amidst {
 		if (!line.hasOption('o'))
 			error("No output file specified");
 		long seed;
+		String seed_string = null;
 		GenType genType = GenType.DEFAULT;
 		if (line.hasOption('s')) {
 			try {
 				seed = Long.parseLong(line.getOptionValue('s'));
 			} catch (NumberFormatException e) {
-				seed = line.getOptionValue('s').hashCode();
+				seed_string = line.getOptionValue('s');
+				seed = seed_string.hashCode();
 				Log.i("Using seed:", seed);
 			}
 		} else {
@@ -132,6 +135,21 @@ public class Amidst {
 		till /= 25;
 		for (int i = 0; i < till; i++)
 			map.draw(g2d);
+		if (opts.hasOption("drawseed")) {
+			Font textFont = new Font("arial", Font.BOLD, 15);
+			Color textColor = new Color(1f, 1f, 1f);
+			Color panelColor = new Color(0.2f, 0.2f, 0.2f, 0.7f);
+			FontMetrics textMetrics = g2d.getFontMetrics(textFont);
+			g2d.setColor(panelColor);
+			String raw = Long.toString(seed);
+			if (seed_string != null)
+				raw += " \"" + seed_string + "\"";
+			g2d.fillRect(10, 10, textMetrics.stringWidth(raw) + 20, 30);
+			g2d.setColor(textColor);
+			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			g2d.setFont(textFont);
+			g2d.drawString(raw, 20, 30);
+		}
 		File outputFile = new File(line.getOptionValue('o'));
 		ImageIO.write(output, "png", outputFile);
 		Log.i("Wrote to", outputFile.getAbsolutePath());
