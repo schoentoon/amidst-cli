@@ -88,15 +88,18 @@ public class Amidst {
 		}
 		if (!line.hasOption('o'))
 			error("No output file specified");
-		long seed = 0;
+		long seed;
 		if (line.hasOption('s')) {
 			try {
 				seed = Long.parseLong(line.getOptionValue('s'));
 			} catch (NumberFormatException e) {
 				seed = line.getOptionValue('s').hashCode();
+				Log.i("Using seed:", seed);
 			}
-		} else
+		} else {
 			seed = new Random().nextLong();
+			Log.i("Using random seed:", seed);
+		}
 		MinecraftUtil.createBiomeGenerator(seed, SaveLoader.Type.DEFAULT);
 		IconLayer[] iconLayers = new IconLayer[]{new VillageLayer(seed)
 												,new StrongholdLayer(seed)
@@ -117,7 +120,7 @@ public class Amidst {
 			map.draw(g2d);
 		File outputFile = new File(line.getOptionValue('o'));
 		ImageIO.write(output, "png", outputFile);
-		System.err.println("Wrote to " + outputFile.getAbsolutePath());
+		Log.i("Wrote to", outputFile.getAbsolutePath());
 		System.exit(0);
 	}
 
