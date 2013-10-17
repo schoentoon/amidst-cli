@@ -26,7 +26,6 @@ public class SpawnLayer extends IconLayer {
 	
 	public SpawnLayer(final long seed) {
 		super("spawnPoint", seed);
-		setVisible(true);
 		
 		Point spawnCenter = getSpawnPosition();
 		spawnObject = new MapObjectSpawn(spawnCenter.x, spawnCenter.y);

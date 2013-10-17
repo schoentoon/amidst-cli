@@ -21,8 +21,6 @@ public class Layer implements Comparable<Layer> {
 	
 	protected Map map;
 	
-	private boolean visible = false;
-	
 	public boolean isTransparent;
 	protected final long seed;
 
@@ -48,16 +46,13 @@ public class Layer implements Comparable<Layer> {
 	public void setMap(Map map) {
 		this.map = map;
 	}
+
 	public Map getMap() {
 		return map;
 	}
-
-	public void setVisible(boolean b) {
-		visible = b;
-	}
 	
 	public boolean isVisible() {
-		return visible;
+		return true;
 	}
 	
 	public void unload(Fragment frag) {

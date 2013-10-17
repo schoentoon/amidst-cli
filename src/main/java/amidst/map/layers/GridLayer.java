@@ -13,7 +13,6 @@ public class GridLayer extends Layer {
 	private static char[] textCache = new char[128];
 	public GridLayer(final long seed) {
 		super("grid", null, 1.1f, seed);
-		setVisible(true);
 	}
 	
 	public void drawLive(Fragment fragment, Graphics2D g, AffineTransform mat) {

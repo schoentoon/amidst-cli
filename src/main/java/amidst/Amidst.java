@@ -30,12 +30,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
+import java.util.*;
+import java.util.List;
 
 public class Amidst {
-	public final static int version_major = 3;
-	public final static int version_minor = 4;
-	public final static String versionOffset = "";
 	public static final Gson gson = new Gson();
 	
 	public static void main(String args[]) throws ParseException, IOException {
@@ -67,6 +65,12 @@ public class Amidst {
 									.hasArgs(1)
 									.withDescription("The width of the output image")
 									.create('H'));
+		opts.addOption(OptionBuilder.withDescription("Mark nether fortresses").create("netherfortress"));
+		opts.addOption(OptionBuilder.withDescription("Mark slime chunks").create("slimechunks"));
+		opts.addOption(OptionBuilder.withDescription("Don't mark villages").create("novillages"));
+		opts.addOption(OptionBuilder.withDescription("Don't mark temples (witch huts are temples too)").create("notemples"));
+		opts.addOption(OptionBuilder.withDescription("Don't mark strongholds").create("nostrongholds"));
+		opts.addOption(OptionBuilder.withDescription("Don't mark spawn").create("nospawn"));
 		CommandLineParser parser = new PosixParser();
 		CommandLine line = parser.parse(opts, args);
 		if (line.hasOption('h') || args.length == 0) {
@@ -101,15 +105,24 @@ public class Amidst {
 			Log.i("Using random seed:", seed);
 		}
 		MinecraftUtil.createBiomeGenerator(seed, SaveLoader.Type.DEFAULT);
-		IconLayer[] iconLayers = new IconLayer[]{new VillageLayer(seed)
-												,new StrongholdLayer(seed)
-												,new TempleLayer(seed)
-												,new SpawnLayer(seed)
-												,new NetherFortressLayer(seed)};
-		Map map = new Map(new Layer[] {new BiomeLayer(seed)
-									,new SlimeLayer(seed)}
+		List<IconLayer> iconLayerList = new ArrayList<IconLayer>(5);
+		if (!line.hasOption("novillages"))
+			iconLayerList.add(new VillageLayer(seed));
+		if (!line.hasOption("nostrongholds"))
+			iconLayerList.add(new StrongholdLayer(seed));
+		if (!line.hasOption("notemples"))
+			iconLayerList.add(new TempleLayer(seed));
+		if (!line.hasOption("nospawn"))
+			iconLayerList.add(new SpawnLayer(seed));
+		if (line.hasOption("netherfortress"))
+			iconLayerList.add(new NetherFortressLayer(seed));
+		List<Layer> layerList = new ArrayList<Layer>(2);
+		layerList.add(new BiomeLayer(seed));
+		if (line.hasOption("slimechunks"))
+			layerList.add(new SlimeLayer(seed));
+		Map map = new Map(layerList.toArray(new Layer[layerList.size()])
 						,new Layer[] {new GridLayer(seed)}
-						,iconLayers);
+						,iconLayerList.toArray(new IconLayer[iconLayerList.size()]));
 		map.width = parseInt(line.getOptionValue('W', "1920"), 1920);
 		map.height = parseInt(line.getOptionValue('H', "1080"), 1080);
 		BufferedImage output = new BufferedImage(map.width, map.height, BufferedImage.TYPE_INT_ARGB);

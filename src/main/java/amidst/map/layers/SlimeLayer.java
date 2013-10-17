@@ -10,7 +10,6 @@ public class SlimeLayer extends Layer {
 	private Random random = new Random();
 	public SlimeLayer(final long seed) {
 		super("slime", null, seed, 0.0f, size);
-		setVisible(false);
 	}
 	
 	public void drawToCache(Fragment fragment, int layerID) {

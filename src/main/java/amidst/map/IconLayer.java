@@ -3,7 +3,6 @@ package amidst.map;
 public class IconLayer {
 	public String name;
 	protected Map map;
-	private boolean visible;
 	protected final long seed;
 	
 	public IconLayer(String name, final long seed) {
@@ -20,11 +19,7 @@ public class IconLayer {
 	}
 
 	public boolean isVisible() {
-		return visible;
-	}
-
-	public void setVisible(boolean b) {
-		visible = b;
+		return true;
 	}
 
 	public void generateMapObjects(Fragment frag) {

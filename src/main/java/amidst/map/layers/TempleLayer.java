@@ -20,7 +20,6 @@ public class TempleLayer extends IconLayer {
 	
 	public TempleLayer(final long seed) {
 		super("temples", seed);
-		setVisible(true);
 		validBiomes = getValidBiomes();
 	}
 

@@ -16,7 +16,6 @@ public class VillageLayer extends IconLayer {
 	
 	public VillageLayer(final long seed) {
 		super("villages", seed);
-		setVisible(true);
 	}
 	public void generateMapObjects(Fragment frag) {
 		int size = Fragment.SIZE >> 4;

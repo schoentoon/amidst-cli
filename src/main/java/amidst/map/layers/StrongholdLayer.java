@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Random;
 
 public class StrongholdLayer extends IconLayer {
-	public static StrongholdLayer instance;
-	
 	private static final Biome[] biomesDefault = {
 		Biome.desert, 
 		Biome.forest, 
@@ -63,8 +61,6 @@ public class StrongholdLayer extends IconLayer {
 	
 	public StrongholdLayer(final long seed) {
 		super("strongholds", seed);
-		instance = this;
-		setVisible(true);
 		findStrongholds();
 	}
 	
