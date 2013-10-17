@@ -1,17 +1,16 @@
 package amidst.map.layers;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-
-import amidst.Global;
 import amidst.Log;
 import amidst.map.Fragment;
 import amidst.map.IconLayer;
 import amidst.map.MapObjectSpawn;
 import amidst.minecraft.Biome;
 import amidst.minecraft.MinecraftUtil;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class SpawnLayer extends IconLayer {
 	private MapObjectSpawn spawnObject;
@@ -25,9 +24,9 @@ public class SpawnLayer extends IconLayer {
 			Biome.jungleHills
 		));
 	
-	public SpawnLayer() {
-		super("spawnPoint");
-		setVisibilityPref(Global.instance.showSpawn);
+	public SpawnLayer(final long seed) {
+		super("spawnPoint", seed);
+		setVisible(true);
 		
 		Point spawnCenter = getSpawnPosition();
 		spawnObject = new MapObjectSpawn(spawnCenter.x, spawnCenter.y);
@@ -44,7 +43,7 @@ public class SpawnLayer extends IconLayer {
 	}
 	
 	private Point getSpawnPosition() {
-		Random random = new Random(Global.instance.seed);
+		Random random = new Random(seed);
 		Point location = MinecraftUtil.findValidLocation(0, 0, 256, validBiomes, random);
 		int x = 0;
 		int y = 0;

@@ -1,16 +1,7 @@
 package amidst.map;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-
-import javax.imageio.ImageIO;
-
-import amidst.Log;
-import amidst.preferences.BooleanPrefModel;
 
 public class Layer implements Comparable<Layer> {
 	public String name;
@@ -30,20 +21,19 @@ public class Layer implements Comparable<Layer> {
 	
 	protected Map map;
 	
-	private BooleanPrefModel visible = null;
+	private boolean visible = false;
 	
 	public boolean isTransparent;
-	
-	public Layer(String name) {
-		this(name, null);
+	protected final long seed;
+
+	public Layer(String name, CacheManager cacheManager, final long seed) {
+		this(name, cacheManager, 1f, seed);
 	}
-	public Layer(String name, CacheManager cacheManager) {
-		this(name, cacheManager, 1f);
+	public Layer(String name, CacheManager cacheManager, float depth, final long seed) {
+		this(name, cacheManager, seed, depth, Fragment.SIZE);
 	}
-	public Layer(String name, CacheManager cacheManager, float depth) {
-		this(name, cacheManager, depth, Fragment.SIZE);
-	}
-	public Layer(String name, CacheManager cacheManager, float depth, int size) {
+	public Layer(String name, CacheManager cacheManager, final long seed, float depth, int size) {
+		this.seed = seed;
 		this.name = name;
 		this.cacheManager = cacheManager;
 		this.cacheEnabled = (cacheManager != null);
@@ -61,12 +51,13 @@ public class Layer implements Comparable<Layer> {
 	public Map getMap() {
 		return map;
 	}
+
+	public void setVisible(boolean b) {
+		visible = b;
+	}
 	
 	public boolean isVisible() {
-		return (visible == null) || visible.get();
-	}
-	public void setVisibilityPref(BooleanPrefModel visibility) {
-		visible = visibility;
+		return visible;
 	}
 	
 	public void unload(Fragment frag) {

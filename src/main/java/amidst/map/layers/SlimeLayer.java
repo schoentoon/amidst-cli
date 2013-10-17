@@ -1,17 +1,16 @@
 package amidst.map.layers;
 
-import java.util.Random;
-
-import amidst.Global;
 import amidst.map.Fragment;
 import amidst.map.Layer;
+
+import java.util.Random;
 
 public class SlimeLayer extends Layer {
 	private static int size = Fragment.SIZE >> 4;
 	private Random random = new Random();
-	public SlimeLayer() {
-		super("slime", null, 0.0f, size);
-		setVisibilityPref(Global.instance.showSlimeChunks);
+	public SlimeLayer(final long seed) {
+		super("slime", null, seed, 0.0f, size);
+		setVisible(false);
 	}
 	
 	public void drawToCache(Fragment fragment, int layerID) {
@@ -20,7 +19,7 @@ public class SlimeLayer extends Layer {
 			for (int x = 0; x < size; x++) {
 				int xPosition = fragment.getChunkX() + x;
 				int yPosition = fragment.getChunkY() + y;
-				random.setSeed(Global.instance.seed +
+				random.setSeed(seed +
 					(long) (xPosition * xPosition * 0x4c1906) + 
                     (long) (xPosition * 0x5ac0db) + 
                     (long) (yPosition * yPosition) * 0x4307a7L + 

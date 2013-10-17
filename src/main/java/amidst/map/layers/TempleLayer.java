@@ -1,10 +1,5 @@
 package amidst.map.layers;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
-import amidst.Global;
 import amidst.foreign.VersionInfo;
 import amidst.map.Fragment;
 import amidst.map.IconLayer;
@@ -15,16 +10,20 @@ import amidst.minecraft.Biome;
 import amidst.minecraft.Minecraft;
 import amidst.minecraft.MinecraftUtil;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 public class TempleLayer extends IconLayer {
 	public static List<Biome> validBiomes;
 	private Random random = new Random();
 	
-	public TempleLayer() {
-		super("temples");
-		setVisibilityPref(Global.instance.showTemples);
-		
+	public TempleLayer(final long seed) {
+		super("temples", seed);
+		setVisible(true);
 		validBiomes = getValidBiomes();
 	}
+
 	public void generateMapObjects(Fragment frag) {
 		int size = Fragment.SIZE >> 4;
 		for (int x = 0; x < size; x++) {
@@ -89,7 +88,7 @@ public class TempleLayer extends IconLayer {
 		
 		int n = chunkX / i;
 		int i1 = chunkY / i;
-		long l1 = n * 341873128712L + i1 * 132897987541L + Global.instance.seed + 14357617;
+		long l1 = n * 341873128712L + i1 * 132897987541L + seed + 14357617;
 		random.setSeed(l1);
 		n *= i;
 		i1 *= i;

@@ -75,16 +75,16 @@ public class Amidst {
 		}
 		if (!line.hasOption('o'))
 			error("No output file specified");
-		Global.instance.seed = 0;
-		MinecraftUtil.createBiomeGenerator(Global.instance.seed, SaveLoader.Type.DEFAULT);
-		IconLayer[] iconLayers = new IconLayer[]{new VillageLayer()
-												,new StrongholdLayer()
-												,new TempleLayer()
-												,new SpawnLayer()
-												,new NetherFortressLayer()};
-		Map map = new Map(new Layer[] {new BiomeLayer()
-									,new SlimeLayer()}
-						,new Layer[] {new GridLayer()}
+		long seed = 0;
+		MinecraftUtil.createBiomeGenerator(seed, SaveLoader.Type.DEFAULT);
+		IconLayer[] iconLayers = new IconLayer[]{new VillageLayer(seed)
+												,new StrongholdLayer(seed)
+												,new TempleLayer(seed)
+												,new SpawnLayer(seed)
+												,new NetherFortressLayer(seed)};
+		Map map = new Map(new Layer[] {new BiomeLayer(seed)
+									,new SlimeLayer(seed)}
+						,new Layer[] {new GridLayer(seed)}
 						,iconLayers);
 		map.width = 1920;
 		map.height = 1080;

@@ -1,13 +1,6 @@
 package amidst.map.layers;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-
 import amidst.Log;
-import amidst.Util;
-import amidst.map.ByteArrayCache;
-import amidst.map.CacheManager;
 import amidst.map.Fragment;
 import amidst.map.Layer;
 import amidst.minecraft.Biome;
@@ -16,8 +9,8 @@ import amidst.minecraft.MinecraftUtil;
 public class BiomeLayer extends Layer {
 
 	private static int size = Fragment.SIZE >> 2;
-	public BiomeLayer() {
-		super("biome", null, 0.0f, size);
+	public BiomeLayer(final long seed) {
+		super("biome", null, seed, 0.0f, size);
 		isTransparent = false;
 	}
 	public void drawToCache(Fragment fragment, int layerID) {

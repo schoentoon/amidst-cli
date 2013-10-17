@@ -1,5 +1,4 @@
 package amidst.map;
-import amidst.Global;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -31,10 +30,6 @@ public class MapObject extends Point {
 	
 	public BufferedImage getImage() {
 		return type.image;
-	}
-	
-	public boolean isSelectable() {
-		return Global.instance.showVillages.isSelected();
 	}
 	
 	public MapObject setParent(IconLayer layer) {

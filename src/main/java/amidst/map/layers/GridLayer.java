@@ -1,22 +1,19 @@
 package amidst.map.layers;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-
-import amidst.Global;
 import amidst.map.Fragment;
 import amidst.map.Layer;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 
 public class GridLayer extends Layer {
 	private static Font drawFont = new Font("arial", Font.BOLD, 16);
 	private static StringBuffer textBuffer = new StringBuffer(128);
 	private static char[] textCache = new char[128];
-	public GridLayer() {
-		super("grid", null, 1.1f);
-		setVisibilityPref(Global.instance.showGrid);
+	public GridLayer(final long seed) {
+		super("grid", null, 1.1f, seed);
+		setVisible(true);
 	}
 	
 	public void drawLive(Fragment fragment, Graphics2D g, AffineTransform mat) {

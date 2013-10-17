@@ -1,18 +1,16 @@
 package amidst.map.layers;
 
-import java.util.Random;
-
-import amidst.Global;
 import amidst.map.Fragment;
 import amidst.map.IconLayer;
 import amidst.map.MapObjectNether;
 
+import java.util.Random;
+
 public class NetherFortressLayer extends IconLayer {
 	private Random random = new Random();
 	
-	public NetherFortressLayer() {
-		super("netherfortress");
-		setVisibilityPref(Global.instance.showNetherFortresses);
+	public NetherFortressLayer(final long seed) {
+		super("netherfortress", seed);
 	}
 	public void generateMapObjects(Fragment frag) {
 		int size = Fragment.SIZE >> 4;
@@ -32,7 +30,7 @@ public class NetherFortressLayer extends IconLayer {
 		int i = chunkX >> 4;
 		int j = chunkY >> 4;
 
-		random.setSeed((long)(i ^ j << 4) ^ Global.instance.seed);
+		random.setSeed((long)(i ^ j << 4) ^ seed);
 		random.nextInt();
 
 		if (random.nextInt(3) != 0) {

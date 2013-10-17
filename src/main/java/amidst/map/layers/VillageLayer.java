@@ -1,23 +1,22 @@
 package amidst.map.layers;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
-import amidst.Global;
 import amidst.map.Fragment;
 import amidst.map.IconLayer;
 import amidst.map.MapObjectVillage;
 import amidst.minecraft.Biome;
 import amidst.minecraft.MinecraftUtil;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 public class VillageLayer extends IconLayer {
 	public static List<Biome> validBiomes = Arrays.asList(new Biome[] { Biome.plains, Biome.desert, Biome.savanna});
 	private Random random = new Random();
 	
-	public VillageLayer() {
-		super("villages");
-		setVisibilityPref(Global.instance.showVillages);
+	public VillageLayer(final long seed) {
+		super("villages", seed);
+		setVisible(true);
 	}
 	public void generateMapObjects(Fragment frag) {
 		int size = Fragment.SIZE >> 4;
@@ -45,7 +44,7 @@ public class VillageLayer extends IconLayer {
 		int n = chunkX / villageParam1;
 		int i1 = chunkY / villageParam1;
 		
-		long positionSeed = n * 341873128712L + i1 * 132897987541L + Global.instance.seed + 10387312L;
+		long positionSeed = n * 341873128712L + i1 * 132897987541L + seed + 10387312L;
 		random.setSeed(positionSeed);
 		
 		

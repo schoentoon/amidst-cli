@@ -1,34 +1,33 @@
 package amidst.map;
 
-import amidst.preferences.BooleanPrefModel;
-
-
 public class IconLayer {
 	public String name;
 	protected Map map;
+	private boolean visible;
+	protected final long seed;
 	
-	private BooleanPrefModel visible = null;
-	
-	public IconLayer(String name) {
+	public IconLayer(String name, final long seed) {
 		this.name = name;
+		this.seed = seed;
 	}
 	
 	public void setMap(Map map) {
 		this.map = map;
 	}
+
 	public Map getMap() {
 		return map;
 	}
+
 	public boolean isVisible() {
-		return (visible == null) || visible.get();
+		return visible;
 	}
-	public void setVisibilityPref(BooleanPrefModel visibility) {
-		visible = visibility;
+
+	public void setVisible(boolean b) {
+		visible = b;
 	}
-	
-	
+
 	public void generateMapObjects(Fragment frag) {
-		
 	}
 	
 	public void clearMapObjects(Fragment frag) {
