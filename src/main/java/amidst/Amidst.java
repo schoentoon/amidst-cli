@@ -151,6 +151,7 @@ public class Amidst {
 			g2d.drawString(raw, 20, 30);
 		}
 		File outputFile = new File(line.getOptionValue('o'));
+		outputFile.mkdirs();
 		ImageIO.write(output, "png", outputFile);
 		Log.i("Wrote to", outputFile.getAbsolutePath());
 		System.exit(0);

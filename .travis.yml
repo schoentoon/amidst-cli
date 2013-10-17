@@ -1,0 +1,9 @@
+language: java
+jdk:
+- oraclejdk7
+- openjdk6
+before_script:
+- wget -O minecraft.jar http://s3.amazonaws.com/Minecraft.Download/versions/${MC_VERSION}/${MC_VERSION}.jar
+env:
+- MC_VERSION=1.6.4
+- MC_VERSION=13w39b
