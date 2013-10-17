@@ -25,10 +25,10 @@ public class Log {
 			listener.error(s);
 	}
 	public static void kill(Object... s) {
-		printwithTag("kill", s);
+		String msg = printwithTag("kill", s);
 		if (isUsingListener)
 			listener.kill(s);
-		System.exit(1);
+		throw new RuntimeException(msg);
 	}
 	
 	public static void writeTo(LogListener l) {
@@ -36,11 +36,14 @@ public class Log {
 		isUsingListener = (l != null);
 	}
 	
-	private static void printwithTag(String tag, Object... msgs) {
+	private static String printwithTag(String tag, Object... msgs) {
 		System.out.print("[" + tag + "] ");
+		String msg = "";
 		for (int i = 0; i < msgs.length; i++) {
-			System.out.print(msgs[i]);
-			System.out.print((i < msgs.length - 1) ? " " : "\n");
+			msg += msgs[i];
+			msg += (i < msgs.length - 1) ? " " : "\n";
 		}
+		System.out.print(msg);
+		return msg;
 	}
 }

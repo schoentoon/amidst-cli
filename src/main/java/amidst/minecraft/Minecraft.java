@@ -87,7 +87,7 @@ public class Minecraft {
 		byteClassMap = new HashMap<String, ByteClass>(MAX_CLASSES);
 		urlToJar = jarFile.toURI().toURL();
 		
-		Log.i("Reading minecraft.jar...");
+		Log.i("Reading", jarFile.getAbsolutePath());
 		if (!jarFile.exists())
 			Log.kill("Attempted to load jar file at: " + jarFile + " but it does not exist.");
 		Stack<ByteClass> byteClassStack = new Stack<ByteClass>();
