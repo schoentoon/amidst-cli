@@ -30,6 +30,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class Amidst {
 	public final static int version_major = 3;
@@ -54,6 +55,18 @@ public class Amidst {
 									.hasArgs(1)
 									.withDescription("Output file to write to")
 									.create('o'));
+		opts.addOption(OptionBuilder.withLongOpt("seed")
+									.hasArgs(1)
+									.withDescription("The seed to use for the output")
+									.create('s'));
+		opts.addOption(OptionBuilder.withLongOpt("width")
+									.hasArgs(1)
+									.withDescription("The width of the output image")
+									.create('W'));
+		opts.addOption(OptionBuilder.withLongOpt("height")
+									.hasArgs(1)
+									.withDescription("The width of the output image")
+									.create('H'));
 		CommandLineParser parser = new PosixParser();
 		CommandLine line = parser.parse(opts, args);
 		if (line.hasOption('h') || args.length == 0) {
@@ -76,6 +89,14 @@ public class Amidst {
 		if (!line.hasOption('o'))
 			error("No output file specified");
 		long seed = 0;
+		if (line.hasOption('s')) {
+			try {
+				seed = Long.parseLong(line.getOptionValue('s'));
+			} catch (NumberFormatException e) {
+				seed = line.getOptionValue('s').hashCode();
+			}
+		} else
+			seed = new Random().nextLong();
 		MinecraftUtil.createBiomeGenerator(seed, SaveLoader.Type.DEFAULT);
 		IconLayer[] iconLayers = new IconLayer[]{new VillageLayer(seed)
 												,new StrongholdLayer(seed)
@@ -86,18 +107,26 @@ public class Amidst {
 									,new SlimeLayer(seed)}
 						,new Layer[] {new GridLayer(seed)}
 						,iconLayers);
-		map.width = 1920;
-		map.height = 1080;
+		map.width = parseInt(line.getOptionValue('W', "1920"), 1920);
+		map.height = parseInt(line.getOptionValue('H', "1080"), 1080);
 		BufferedImage output = new BufferedImage(map.width, map.height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = output.createGraphics();
 		int till = (map.width > map.height) ? map.width : map.height;
-		till /= 50;
+		till /= 25;
 		for (int i = 0; i < till; i++)
 			map.draw(g2d);
 		File outputFile = new File(line.getOptionValue('o'));
 		ImageIO.write(output, "png", outputFile);
 		System.err.println("Wrote to " + outputFile.getAbsolutePath());
 		System.exit(0);
+	}
+
+	private static int parseInt(String str, int def) {
+		try {
+			return Integer.parseInt(str);
+		} catch (NumberFormatException e) {
+			return def;
+		}
 	}
 
 	public static void error(String error) {
