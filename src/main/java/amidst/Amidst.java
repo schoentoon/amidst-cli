@@ -1,6 +1,5 @@
 package amidst;
 
-import MoF.SaveLoader;
 import amidst.json.InstallInformation;
 import amidst.json.LauncherProfile;
 import amidst.map.IconLayer;
@@ -30,8 +29,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Amidst {
 	public static final Gson gson = new Gson();
@@ -93,6 +93,7 @@ public class Amidst {
 		if (!line.hasOption('o'))
 			error("No output file specified");
 		long seed;
+		GenType genType = GenType.DEFAULT;
 		if (line.hasOption('s')) {
 			try {
 				seed = Long.parseLong(line.getOptionValue('s'));
@@ -104,7 +105,7 @@ public class Amidst {
 			seed = new Random().nextLong();
 			Log.i("Using random seed:", seed);
 		}
-		MinecraftUtil.createBiomeGenerator(seed, SaveLoader.Type.DEFAULT);
+		MinecraftUtil.createBiomeGenerator(seed, genType);
 		List<IconLayer> iconLayerList = new ArrayList<IconLayer>(5);
 		if (!line.hasOption("novillages"))
 			iconLayerList.add(new VillageLayer(seed));

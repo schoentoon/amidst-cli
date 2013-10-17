@@ -1,6 +1,6 @@
 package amidst.minecraft;
 
-import MoF.SaveLoader.Type;
+import amidst.GenType;
 import amidst.Log;
 
 import java.awt.*;
@@ -61,7 +61,7 @@ public class MinecraftUtil {
 		return true;
 	}
 	
-	public static void createBiomeGenerator(long seed, Type type) {
+	public static void createBiomeGenerator(long seed, GenType type) {
 		Minecraft minecraft = Minecraft.getActiveMinecraft();
 		MinecraftClass genLayerClass = minecraft.getClassByName("GenLayer");
 		MinecraftClass worldTypeClass = minecraft.getClassByName("WorldType");
