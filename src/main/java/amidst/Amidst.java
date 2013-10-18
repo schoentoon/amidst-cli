@@ -51,7 +51,7 @@ public class Amidst {
 		opts.addOption(OptionBuilder.withLongOpt("help").create('h'));
 		opts.addOption(OptionBuilder.withLongOpt("output")
 									.hasArgs(1)
-									.withDescription("Output file to write to")
+									.withDescription("Output file to write to, %seed% will get replaced with the seed")
 									.create('o'));
 		opts.addOption(OptionBuilder.withLongOpt("seed")
 									.hasArgs(1)
@@ -76,7 +76,7 @@ public class Amidst {
 		CommandLine line = parser.parse(opts, args);
 		if (line.hasOption('h') || args.length == 0) {
 			HelpFormatter formatter = new HelpFormatter();
-			formatter.printHelp("amidst", opts);
+			formatter.printHelp("amidst", opts, true);
 			System.exit(0);
 		}
 		if (line.hasOption('p')) {
@@ -150,7 +150,7 @@ public class Amidst {
 			g2d.setFont(textFont);
 			g2d.drawString(raw, 20, 30);
 		}
-		File outputFile = new File(line.getOptionValue('o'));
+		File outputFile = new File(line.getOptionValue('o').replace("%seed%",Long.toString(seed)));
 		outputFile.mkdirs();
 		ImageIO.write(output, "png", outputFile);
 		Log.i("Wrote to", outputFile.getAbsolutePath());
