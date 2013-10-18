@@ -8,4 +8,4 @@ script:
 - mvn test -Dminecraftjar=minecraft_server.${MC_VERSION}.jar
 env:
 - MC_VERSION=1.6.4
-- MC_VERSION=13w39b
+- MC_VERSION=13w42a

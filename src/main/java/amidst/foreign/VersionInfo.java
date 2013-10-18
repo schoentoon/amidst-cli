@@ -1,13 +1,13 @@
 package amidst.foreign;
 
 
-import java.util.Arrays;
-import java.util.List;
-
 /** Information about what each supported version is
  */
 public enum VersionInfo {
 	unknown(null),
+	V13w42a("psosmrjo[Lmi;lc[J[[J"),
+	V13w41b("pmommljn[Lmc;ky[J[[J"),
+	V13w41a("ppopmojq[Lmf;lb[J[[J"),
 	V13w39a_or_b("npmp[Lkn;jh[J[J[J[J[J[[J"),
 	V13w37b_or_38a("ntmt[Lkm;jg[J[J[J[J[J[[J"),
 	V13w37a("nsms[Lkl;jf[J[J[J[J[J[[J"),
