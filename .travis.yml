@@ -4,8 +4,21 @@ jdk:
 - openjdk7
 before_script:
 - wget http://s3.amazonaws.com/Minecraft.Download/versions/${MC_VERSION}/minecraft_server.${MC_VERSION}.jar
+- sudo apt-get update -qq >/dev/null 2>&1
+- sudo apt-get install curl >/dev/null 2>&1
 script:
 - mvn test -Dminecraftjar=minecraft_server.${MC_VERSION}.jar
+after_script:
+- curl -F "image=@output/test.png" -H "Authorization: Client-ID ${IMGUR_CLIENT_ID}" https://api.imgur.com/3/image.xml
 env:
-- MC_VERSION=1.6.4
-- MC_VERSION=13w42a
+  matrix:
+  - MC_VERSION=1.6.4
+  - MC_VERSION=13w42a
+  global:
+    secure: LbOJ2LK55d1SsVyK2saTX/T5iKGmM43HxKUGtz5EAkv8lzd1rqix36K24r+JPV5NDRW6olSTbEXWTzwPLbisziMZLwXE3tgGcFQpbtiYRamQNGE7GW/2IClNq0z9oNcziPJe5fwCIKzN/+jpC9dWRANtW/UyN0z6X/Y7ZpTzXRI=
+notifications:
+  irc:
+    channels:
+      - "irc.freenode.org#schoentoon"
+    on_success: always
+    on_failure: always
