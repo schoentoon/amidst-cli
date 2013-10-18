@@ -6,14 +6,15 @@ before_script:
 - wget http://s3.amazonaws.com/Minecraft.Download/versions/${MC_VERSION}/minecraft_server.${MC_VERSION}.jar
 - sudo apt-get update -qq >/dev/null 2>&1
 - sudo apt-get install curl >/dev/null 2>&1
+- export TMP=`mktemp --suffix=.png`
 script:
-- mvn test -Dminecraftjar=minecraft_server.${MC_VERSION}.jar
+- mvn test -Dminecraftjar=minecraft_server.${MC_VERSION}.jar -Doutput=${TMP}
 after_script:
-- curl -F "image=@output/test.png" -H "Authorization: Client-ID ${IMGUR_CLIENT_ID}" https://api.imgur.com/3/image.xml
+- curl -v -F "image=@${TMP}" -H "Authorization: Client-ID ${IMGUR_CLIENT_ID}" https://api.imgur.com/3/image.xml | grep -E -o "<link>(.)*</link>" | grep -E -o "http://i.imgur.com/[^<]*"
 env:
   matrix:
   - MC_VERSION=1.6.4
-  - MC_VERSION=13w42a
+  - MC_VERSION=13w42b
   global:
     secure: LbOJ2LK55d1SsVyK2saTX/T5iKGmM43HxKUGtz5EAkv8lzd1rqix36K24r+JPV5NDRW6olSTbEXWTzwPLbisziMZLwXE3tgGcFQpbtiYRamQNGE7GW/2IClNq0z9oNcziPJe5fwCIKzN/+jpC9dWRANtW/UyN0z6X/Y7ZpTzXRI=
 notifications:
