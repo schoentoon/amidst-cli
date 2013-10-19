@@ -65,6 +65,10 @@ public class Amidst {
 									.hasArgs(1)
 									.withDescription("The width of the output image")
 									.create('H'));
+		opts.addOption(OptionBuilder.withLongOpt("centerat")
+									.hasArgs(2)
+									.withDescription("Center at %d %d")
+									.create('c'));
 		opts.addOption(OptionBuilder.withDescription("Mark nether fortresses").create("netherfortress"));
 		opts.addOption(OptionBuilder.withDescription("Mark slime chunks").create("slimechunks"));
 		opts.addOption(OptionBuilder.withDescription("Don't mark villages").create("novillages"));
@@ -131,6 +135,18 @@ public class Amidst {
 		map.height = parseInt(line.getOptionValue('H', "1080"), 1080);
 		BufferedImage output = new BufferedImage(map.width, map.height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = output.createGraphics();
+		map.draw(g2d);
+		if (line.hasOption('c')) {
+			String[] coords = line.getOptionValues('c');
+			if (coords.length == 2) {
+				long x = Long.parseLong(coords[0]);
+				long y = Long.parseLong(coords[1]);
+				map.centerOn(x, y);
+				Log.i("Centering at", x, y);
+			} else {
+				Log.kill("Expected 2 values, not", coords.length);
+			}
+		}
 		int till = (map.width > map.height) ? map.width : map.height;
 		till /= 25;
 		for (int i = 0; i < till; i++)
