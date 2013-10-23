@@ -14,7 +14,7 @@ after_script:
 env:
   matrix:
   - MC_VERSION=1.6.4
-  - MC_VERSION=13w42b
+  - MC_VERSION=1.7.1
   global:
     secure: LbOJ2LK55d1SsVyK2saTX/T5iKGmM43HxKUGtz5EAkv8lzd1rqix36K24r+JPV5NDRW6olSTbEXWTzwPLbisziMZLwXE3tgGcFQpbtiYRamQNGE7GW/2IClNq0z9oNcziPJe5fwCIKzN/+jpC9dWRANtW/UyN0z6X/Y7ZpTzXRI=
 notifications:
