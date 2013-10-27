@@ -5,7 +5,8 @@ package amidst.foreign;
  */
 public enum VersionInfo {
 	unknown(null),
-	V1_7("puoumrjo[Lmi;lc[J[[J"), // Includes 1.7
+    V1_7_2("pvovmsjp[Lmj;ld[J[[J"),
+	V1_7_1("puoumrjo[Lmi;lc[J[[J"), // Includes 1.7
 	V13w43a("ptotmsjp[Lmj;ld[J[[J"),
 	V13w42a_or_b("psosmrjo[Lmi;lc[J[[J"),
 	V13w41b("pmommljn[Lmc;ky[J[[J"),
