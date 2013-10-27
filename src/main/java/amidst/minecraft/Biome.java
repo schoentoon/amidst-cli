@@ -1,8 +1,5 @@
 package amidst.minecraft;
 
-import java.awt.Color;
-import java.util.HashMap;
-
 import amidst.Util;
 
 public class Biome {

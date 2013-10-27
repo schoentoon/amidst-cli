@@ -13,6 +13,7 @@ import amidst.map.layers.SpawnLayer;
 import amidst.map.layers.StrongholdLayer;
 import amidst.map.layers.TempleLayer;
 import amidst.map.layers.VillageLayer;
+import amidst.minecraft.Biome;
 import amidst.minecraft.Minecraft;
 import amidst.minecraft.MinecraftUtil;
 import com.google.gson.Gson;
@@ -76,11 +77,21 @@ public class Amidst {
 		opts.addOption(OptionBuilder.withDescription("Don't mark strongholds").create("nostrongholds"));
 		opts.addOption(OptionBuilder.withDescription("Don't mark spawn").create("nospawn"));
 		opts.addOption(OptionBuilder.withDescription("Draw the seed").create("drawseed"));
+		opts.addOption(OptionBuilder.withDescription("Describe colors").create("describecolors"));
 		CommandLineParser parser = new PosixParser();
 		CommandLine line = parser.parse(opts, args);
 		if (line.hasOption('h') || args.length == 0) {
 			HelpFormatter formatter = new HelpFormatter();
 			formatter.printHelp("amidst", opts, true);
+			System.exit(0);
+		} else if (line.hasOption("describecolors")) {
+			for (Biome biome : Biome.biomes) {
+				if (biome == null)
+					continue;
+				System.out.print(Integer.toHexString(biome.color - 0xFF000000).toUpperCase());
+				System.out.print(" ~ ");
+				System.out.println(biome.name);
+			}
 			System.exit(0);
 		}
 		if (line.hasOption('p')) {
