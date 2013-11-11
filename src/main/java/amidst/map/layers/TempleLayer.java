@@ -30,9 +30,8 @@ public class TempleLayer extends IconLayer {
 				int chunkX = x + frag.getChunkX();
 				int chunkY = y + frag.getChunkY();
 				if (checkChunk(chunkX, chunkY)) {
-					//getValidTemple(frag, x << 4, y << 4);
-					String biomeName = BiomeLayer.getBiomeNameForFragment(frag, x << 4, y << 4);
-					if (biomeName.equals("Swampland"))
+					int biome = BiomeLayer.getBiomeForFragment(frag, x << 4, y << 4);
+					if (biome == Biome.swampland.index || biome == Biome.swamplandM.index)
 						frag.addObject(new MapObjectWitchHut(x << 4, y << 4).setParent(this));
 					else
 						frag.addObject(new MapObjectTemple(x << 4, y << 4).setParent(this));
@@ -52,22 +51,20 @@ public class TempleLayer extends IconLayer {
 	public List<Biome> getValidBiomes() {
 		Biome[] validBiomes;
 
-        if (Minecraft.getActiveMinecraft().version.isAtLeast(VersionInfo.V13w36a)) {
-            validBiomes = new Biome[] {
-                Biome.desert,
-                Biome.desertM,
-                Biome.desertHills,
-                Biome.desertHillsM,
-                Biome.jungle,
-                Biome.jungleM,
-                Biome.jungleHills,
-                Biome.jungleHillsM,
-                Biome.jungleEdge,
-                Biome.jungleEdgeM,
-                Biome.swampland,
-                Biome.swamplandM
-            };
-        } else if (Minecraft.getActiveMinecraft().version.isAtLeast(VersionInfo.V1_4_2)) {
+		if (Minecraft.getActiveMinecraft().version.isAtLeast(VersionInfo.V13w36a)) {
+			validBiomes = new Biome[] {Biome.desert
+									  ,Biome.desertM
+									  ,Biome.desertHills
+									  ,Biome.desertHillsM
+									  ,Biome.jungle
+									  ,Biome.jungleM
+									  ,Biome.jungleHills
+									  ,Biome.jungleHillsM
+									  ,Biome.jungleEdge
+									  ,Biome.jungleEdgeM
+									  ,Biome.swampland
+									  ,Biome.swamplandM};
+		} else if (Minecraft.getActiveMinecraft().version.isAtLeast(VersionInfo.V1_4_2)) {
 			validBiomes = new Biome[] {
 				Biome.desert,
 				Biome.desertHills,

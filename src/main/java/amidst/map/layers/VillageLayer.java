@@ -11,7 +11,15 @@ import java.util.List;
 import java.util.Random;
 
 public class VillageLayer extends IconLayer {
-	public static List<Biome> validBiomes = Arrays.asList(new Biome[] { Biome.plains, Biome.desert, Biome.savanna});
+	public static List<Biome> validBiomes = Arrays.asList(new Biome[] {Biome.plains
+																	  ,Biome.desert
+																	  ,Biome.desertM
+																	  ,Biome.desertHills
+																	  ,Biome.desertHillsM
+																	  ,Biome.savanna
+																	  ,Biome.savannaM
+																	  ,Biome.savannaPlateau
+																	  ,Biome.savannaPlateauM});
 	private Random random = new Random();
 	
 	public VillageLayer(final long seed) {
