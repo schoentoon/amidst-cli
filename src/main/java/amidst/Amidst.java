@@ -88,7 +88,7 @@ public class Amidst {
 			for (Biome biome : Biome.biomes) {
 				if (biome == null)
 					continue;
-				System.out.print(Integer.toHexString(biome.color - 0xFF000000).toUpperCase());
+				System.out.print(String.format("%06x", (biome.color - 0xFF000000)).toUpperCase());
 				System.out.print(" ~ ");
 				System.out.println(biome.name);
 			}

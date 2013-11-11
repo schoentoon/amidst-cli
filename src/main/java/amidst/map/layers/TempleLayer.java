@@ -51,8 +51,23 @@ public class TempleLayer extends IconLayer {
 	}
 	public List<Biome> getValidBiomes() {
 		Biome[] validBiomes;
-		
-		if (Minecraft.getActiveMinecraft().version.isAtLeast(VersionInfo.V1_4_2)) {
+
+        if (Minecraft.getActiveMinecraft().version.isAtLeast(VersionInfo.V13w36a)) {
+            validBiomes = new Biome[] {
+                Biome.desert,
+                Biome.desertM,
+                Biome.desertHills,
+                Biome.desertHillsM,
+                Biome.jungle,
+                Biome.jungleM,
+                Biome.jungleHills,
+                Biome.jungleHillsM,
+                Biome.jungleEdge,
+                Biome.jungleEdgeM,
+                Biome.swampland,
+                Biome.swamplandM
+            };
+        } else if (Minecraft.getActiveMinecraft().version.isAtLeast(VersionInfo.V1_4_2)) {
 			validBiomes = new Biome[] {
 				Biome.desert,
 				Biome.desertHills,
